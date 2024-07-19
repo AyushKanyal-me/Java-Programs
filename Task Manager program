@@ -1,0 +1,83 @@
+package collection;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+
+
+class TasKManager
+{
+	
+	String name;
+	int priority;
+	
+	@Override
+	public String toString() {
+		return "Name of task: " + this.name + ", Priority of task: " + this.priority;
+	}
+	
+	Comparator<TasKManager>comparator;
+	
+	private LinkedList<TasKManager> list = new LinkedList<TasKManager>();
+	
+	void addTask(String name, int priority) 
+	{
+		TasKManager mgr = new TasKManager();
+		mgr.name = name;
+		mgr.priority = priority;
+		this.list.add(mgr);
+	}
+	
+	boolean removeTask(String name)
+	{
+		
+		for(TasKManager tm : this.list)
+		{
+			if(tm.name.equals(name))
+			{
+				list.remove(tm);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	
+	void executeTask()
+	{
+		
+		Collections.sort(list, Comparator.comparingInt(task -> task.priority));
+		
+		list.forEach(i -> System.out.println(i.name + " is executed."));
+		
+	}
+	
+	void printTask()
+	{
+		Collections.sort(list, Comparator.comparingInt(task -> task.priority));
+		
+		for(int i = 0; i < list.size(); i++)
+		{
+			TasKManager obj = list.get(i);
+			System.out.println(obj);
+		}
+	}
+}
+
+
+public class QuestionOnCollection {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		TasKManager manager = new TasKManager();
+		
+		manager.addTask("A", 3);
+		manager.addTask("B", 2);
+		
+//		System.out.println(manager.removeTask("A"));
+//		manager.executeTask();
+		manager.printTask();
+	}
+
+}
